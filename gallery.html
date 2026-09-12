@@ -156,11 +156,7 @@
     <div class="timeline reveal" id="timeline-container"></div>
   </section>
 
-  <div style="text-align: center; margin-bottom: 5rem; position: relative; z-index: 10;">
-    <a href="video.html" class="btn-primary" style="max-width: 320px;">
-      <span>🎥</span> Watch Secret Video Message
-    </a>
-  </div>
+  
 
   <footer>
     <div class="footer-heart">🎂</div>
@@ -272,6 +268,36 @@
       if (index >= totalSlides) index = 0;
       goToSlide(index);
     });
+
+    // === FITUR SWIPE (GESER LAYAR) UNTUK HP ===
+    let touchStartX = 0;
+    let touchEndX = 0;
+    const sliderWrapper = document.querySelector('.gallery-slider-wrapper');
+
+    sliderWrapper.addEventListener('touchstart', e => {
+      touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+
+    sliderWrapper.addEventListener('touchend', e => {
+      touchEndX = e.changedTouches[0].screenX;
+      handleSwipe();
+    }, { passive: true });
+
+    function handleSwipe() {
+      const swipeThreshold = 40; // Jarak minimal jari bergeser
+      if (touchEndX < touchStartX - swipeThreshold) {
+        // Geser ke kiri (Next)
+        let index = activeSlideIndex + 1;
+        if (index >= totalSlides) index = 0;
+        goToSlide(index);
+      }
+      if (touchEndX > touchStartX + swipeThreshold) {
+        // Geser ke kanan (Prev)
+        let index = activeSlideIndex - 1;
+        if (index < 0) index = totalSlides - 1;
+        goToSlide(index);
+      }
+    }
 
     function goToSlide(index) {
       activeSlideIndex = index;
@@ -436,4 +462,3 @@
   </script>
 </body>
 </html>
-```[cite: 3]

@@ -1948,3 +1948,23 @@ footer { padding:3rem 1.25rem; }
   .split-left-photo { width:105px; height:140px; }
   .split-left-title { font-size:1.9rem; }
 }
+
+/* --- FIX SLIDER GALLERY HP --- */
+@media (max-width: 600px) {
+  .slider-arrow {
+    display: flex !important; /* Memaksa tombol panah muncul di HP */
+    width: 44px !important;
+    height: 44px !important;
+    background: rgba(127, 23, 52, 0.8) !important;
+    color: white !important;
+    border: none !important;
+    z-index: 99 !important;
+  }
+  .slider-arrow.prev { left: 10px !important; }
+  .slider-arrow.next { right: 10px !important; }
+  
+  /* Mencegah foto kepotong saat digeser */
+  .gallery-slide-item {
+    padding: 0.5rem !important;
+  }
+}

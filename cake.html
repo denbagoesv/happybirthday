@@ -87,8 +87,8 @@
     ];
 
     let currentProgress = 0;
-    const duration = 3500; // 3.5 seconds
-    const intervalTime = 40; // update speed
+    const duration = 1000; // Dipangkas jadi 1 detik biar cepat dan sat-set
+    const intervalTime = 30; // Kecepatan update diperhalus
     const increment = (100 / (duration / intervalTime));
 
     const loadingTimer = setInterval(() => {
@@ -100,10 +100,10 @@
         // Final chime sound
         playSuccessChime();
 
-        // Redirect
+        // Redirect langsung tanpa jeda lama
         setTimeout(() => {
           window.location.href = "celebration.html";
-        }, 300);
+        }, 150);
       }
 
       const roundedProgress = Math.floor(currentProgress);
