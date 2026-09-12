@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Happy Birthday! 🎂</title>
   <link
     href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@400;500;600;700"
@@ -60,7 +60,7 @@
     <div class="celebration-title-container">
       <p class="celebration-eyebrow">A Magical Day Has Arrived</p>
       <h1 class="celebration-giant-text">
-        HAPPY BIRTHDAY 
+        Happy Birthday 
       </h1>
 
       <h2 class="celebration-eyebrow" id="recipient-greeting"
@@ -120,20 +120,6 @@
     </a>
   </section>
 
-  <!-- Cork Board Wishes Wall -->
-  <section class="wishes-section">
-    <p class="section-label reveal">Sticky Wall</p>
-    <h2 class="section-title reveal">Shared <em>Wishes Board</em> 📌</h2>
-    <div class="divider reveal"></div>
-    <p class="reveal" style="text-align: center; color: rgba(255,248,240,0.6); max-width: 500px; margin: 0 auto;">
-      A collection of beautiful messages pinned by those who love you. Your secret wish will also pin here!
-    </p>
-
-    <div class="wishes-grid reveal" id="wish-board-container">
-      <!-- Sticky notes rendered by JS -->
-    </div>
-  </section>
-
   <!-- Footer -->
   <footer>
     <div class="footer-heart">🎂</div>
@@ -154,7 +140,6 @@
     const inputName = document.getElementById("input-name");
     const inputSubtext = document.getElementById("input-subtext");
     const themeOpts = document.querySelectorAll(".theme-opt");
-    const wishBoard = document.getElementById("wish-board-container");
 
     function updatePageContent() {
       const recipientName = (activeConfig.name || "Adel").trim();
@@ -173,28 +158,6 @@
       themeOpts.forEach(opt => {
         opt.classList.toggle("selected", opt.dataset.themeVal === activeConfig.theme);
       });
-
-      // Render Pinned Sticky Notes
-      renderWishBoard();
-    }
-
-    function renderWishBoard() {
-      wishBoard.innerHTML = "";
-      const w = (activeConfig.wishes && activeConfig.wishes[0]) || {
-        icon: "♡",
-        text: "A little wish, written with all my love. ♡",
-        author: "— With all my love",
-        color: "#7f1734"
-      };
-
-      wishBoard.innerHTML = `
-        <article class="sticky-note single-wish-note">
-          <div class="sticky-icon">${w.icon || "♡"}</div>
-          <p class="sticky-kicker">A little wish for you</p>
-          <p class="sticky-text">${w.text || ""}</p>
-          <p class="sticky-author">${w.author || "— With all my love ♡"}</p>
-        </article>
-      `;
     }
 
     // Interactive Candle Blowing logic
@@ -259,7 +222,6 @@
     const btnCastWish = document.getElementById("btn-cast-wish");
 
     btnCastWish.addEventListener("click", () => {
-      const author = activeConfig.name || "Adel";
       const wishText = "My secret birthday wish... 🤫✨";
 
       // First, blow out all flames if not blown yet
@@ -274,17 +236,16 @@
       // Launch shooting star particle ascending from the cake
       createShootingStar(wishText);
 
-      // Add to config local state & wish board
+      // Add to config local state
       setTimeout(() => {
         activeConfig.wishes = [{
           icon: "🌟",
           text: wishText,
-          author: `— ${author} ♡`,
+          author: `— ${activeConfig.name || "Adel"} ♡`,
           color: "#7f1734"
         }];
 
         saveConfig();
-        renderWishBoard();
         triggerFullBlowCelebration();
 
         // Relight candles after 4 seconds
